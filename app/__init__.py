@@ -11,7 +11,12 @@ SECRET_KEY = 'Sup3r$3cretkey'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-app.config['USERNAME'] = USERNAME
-app.config['PASSWORD'] = PASSWORD
+
+
+
+# allowed_uploads = ['png','jpg']
+
+# app.config['USERNAME'] = USERNAME
+# app.config['PASSWORD'] = PASSWORD
 
 from app import views

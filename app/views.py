@@ -27,34 +27,31 @@ def about():
     return render_template('about.html', name="Mary Jane")
 
 
-@app.route('/upload', methods=['POST', 'GET'])
+@app.route('/upload/', methods=['POST', 'GET'])
 def upload():
+    photoForm= UploadForm()
     if not session.get('logged_in'):
         abort(401)
-
     # Instantiate your form class
-    photoForm = UploadForm()
-    if request.method =='GET':
-        # Validate file upload on submit
-        if request.method == 'POST' and photoForm.validate_on_submit():
-            # Get file data and save to your uploads folder
-            # photo = request.files['photo']
-            photo = photoForm.photo.data
 
+    # Validate file upload on submit
+    
+    if request.method == 'POST':
+        # Get file data and save to your uploads folder
+        if photoForm.validate_on_submit():
+            photo = photoForm.photo.data
             filename = secure_filename(photo.filename)
-            
-            photo.save(os.path.join(
-                app.config['UPLOAD_FOLDER'], filename
-            ))
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File Saved', 'success')
             return redirect(url_for('home'))
-            return render_template('display_photo.html', filename=filename)
+    else:
+        return render_template('upload.html',form  = photoForm)
 
-            
-        flash_errors(photoForm)
-        return render_template('upload.html', form = photoForm)
+    if request.method == 'GET':
+        return render_template('upload.html')
 
-
+    
+    
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     error = None
