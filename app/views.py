@@ -24,7 +24,7 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Krystall Messam")
 
 
 @app.route('/upload/', methods=['POST', 'GET'])
@@ -49,9 +49,23 @@ def upload():
 
     if request.method == 'GET':
         return render_template('upload.html')
+def get_uploaded_images(): 
+    lst = []
+    rootdir = os.getcwd()
+    # print rootdir
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
+        for file in files:
+            lst.append(file)
+    return lst
+    
+@app.route('/files')
+def files():
+    if not session.get ('logged_in'): 
+        abort(401)
+    lst = get_uploaded_images()
+    return render_template('files.html', lst=lst)
 
-    
-    
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     error = None
