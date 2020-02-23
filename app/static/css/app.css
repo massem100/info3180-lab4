@@ -1,3 +1,18 @@
 body {
     padding-top: 5rem;
 }
+img{ 
+    background-color: #f1f1f1;
+    width: 250px;
+    height:250px;
+    margin: 10px;
+    line-height: 75px;
+    
+}
+#container{ 
+    width: 90%;
+    display:flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+

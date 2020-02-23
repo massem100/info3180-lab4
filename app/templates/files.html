@@ -4,12 +4,17 @@
         <div> 
             <h3> List of Files</h3>
         </div>
+        <div id = "container">
         {% for f in lst %}
-        <div> class = grid
+            <div class="grid">
 
-            <img src = "{{url_for ('static', filename = 'uploads/' + f)}}"> </img>
+                <img src = "{{url_for ('static', filename = 'uploads/' + f)}}"> 
+            </div>
+        {% endfor %}
         </div>
-    {% endfor %}
 
+        <div>
+            <h6> Figure 1: Images should be displayed in a Grid </h6>
+        </div>
     </div>
-    {% endblock %}
+{% endblock %}
